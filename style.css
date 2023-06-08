@@ -5,6 +5,18 @@
     --scrollbar-track-color: #d3d3de;
     --scrollbar-thumb-color: #5D5BD4;
     --scrollbar-thumb-hover-color: #886efd;
+    --background-color: #ffffff;
+    --font-color: #b3b6d4;  }
+
+  .dark-mode{
+    --primary-color: #8187e0;
+  --secondary-color: #8b8ae3;
+  --accent-color: #a7a9c0;
+  --scrollbar-track-color: #31326f;
+  --scrollbar-thumb-color: #8b8ae3;
+  --scrollbar-thumb-hover-color: #886efd;
+  --background-color: #1f194c;
+  --font-color: #d2d4e3;
   }
   
   * {
@@ -18,7 +30,7 @@
   }
   
   .container {
-    background-color: #ffffff;
+    background-color: var(--background-color);
     width: 90vmin;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -63,6 +75,7 @@
     outline: none;
     border-bottom: 3px solid var(--secondary-color);
     font-size: 16px;
+    background-color: var(--background-color);
   }
   
   .search-box i {
@@ -124,7 +137,7 @@
   .result .details {
     display: flex;
     gap: 10px;
-    color: #b3b6d4;
+    color: var(--font-color);
     margin: 5px 0 20px 0;
     font-size: 14px;
   }

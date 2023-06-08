@@ -2,6 +2,21 @@ const url = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 const result = document.getElementById("result");
 const sound = document.getElementById("sound");
 const searchBtn = document.getElementById("search-btn");
+const container = document.querySelector('body');
+const toggleBtn = document.getElementById('toggle-btn');
+const toggleIcon = document.getElementById('toggle-icon');
+
+toggleBtn.addEventListener('click', () => {
+    container.classList.toggle('dark-mode');
+  
+    if (container.classList.contains('dark-mode')) {
+      toggleIcon.classList.remove('fa-sun');
+      toggleIcon.classList.add('fa-moon');
+    } else {
+      toggleIcon.classList.remove('fa-moon');
+      toggleIcon.classList.add('fa-sun');
+    }
+  });
 
 searchBtn.addEventListener("click", () => {
     let inpWord = document.getElementById("inp-word").value;
