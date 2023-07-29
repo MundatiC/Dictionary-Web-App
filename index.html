@@ -4,9 +4,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- Font Awesome -->
         <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        />
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      />
        
        
 
@@ -16,11 +16,11 @@
     </head>
     <body>
         <audio id="sound"></audio>
-        <di class="container">
+        <div class="container">
             
-                <button id="toggle-btn">
-                  <i id="toggle-icon" class="fas fa-sun"></i>
-                </button>
+            <button id="toggle-btn" aria-label="Toggle Dark Mode">
+                <i id="toggle-icon" class="fas fa-sun"></i>
+            </button>
               
               
               
@@ -29,6 +29,7 @@
                     type="text"
                     placeholder="Type here.."
                     id="inp-word"
+                    aria-label="Search"
                     required
                 />
                 <i id="search-btn" class="fas fa-search"></i>

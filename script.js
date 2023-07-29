@@ -1,10 +1,20 @@
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+const inpWord = document.getElementById("inp-word");
 const result = document.getElementById("result");
 const sound = document.getElementById("sound");
 const searchBtn = document.getElementById("search-btn");
-const container = document.querySelector('body');
-const toggleBtn = document.getElementById('toggle-btn');
-const toggleIcon = document.getElementById('toggle-icon');
+const container = document.querySelector("body");
+const toggleBtn = document.getElementById("toggle-btn");
+const toggleIcon = document.getElementById("toggle-icon");
+
+
+inpWord.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    searchBtn.click(); // Trigger the click event of the search button
+  }
+});
+
 
 toggleBtn.addEventListener('click', () => {
     container.classList.toggle('dark-mode');
@@ -18,7 +28,7 @@ toggleBtn.addEventListener('click', () => {
     }
   });
 
-searchBtn.addEventListener("click", () => {
+searchBtn.addEventListener("click", async  () => {
     let inpWord = document.getElementById("inp-word").value;
     
     if (!inpWord) {
@@ -28,10 +38,13 @@ searchBtn.addEventListener("click", () => {
 
     showLoadingPage(); // Show the loading page
 
-    fetch(`${url}${inpWord}`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
+    try {
+        const encodedWord = encodeURIComponent(inpWord);
+        const response = await fetch(`${url}${encodedWord}`);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
 
             if (!data.length) {
                 displayMessage("Word not found");
@@ -80,16 +93,16 @@ searchBtn.addEventListener("click", () => {
 
                 html += meaningHtml; // Append the meaning HTML to the main HTML content
             });
-
             result.innerHTML = html; // Set the main HTML content
             hideLoadingPage(); // Hide the loading page
 
             sound.setAttribute("src", data[0].phonetics[0].audio);
-        })
-        .catch(() => {
-            displayMessage("An error occurred");
-            hideLoadingPage(); // Hide the loading page
-        });
+        }
+     catch (error) {
+        displayMessage("Word not found");
+        console.log(error)
+        hideLoadingPage();
+    }
 
         document.getElementById("inp-word").value = "";
 
@@ -98,8 +111,7 @@ searchBtn.addEventListener("click", () => {
 function showLoadingPage() {
     result.innerHTML = `
         <div class="loading">
-            <i class="fas fa-spinner fa-spin"></i>
-            Loading...
+        <i class="fa-solid fa-spinner fa-spin"></i>
         </div>
     `;
 }
